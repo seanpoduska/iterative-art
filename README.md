@@ -1,2 +1,2 @@
 # iterative-art
-Image generation based on iterative math. Feat. Mandelbrot &amp; Julia fractals, Lorenz &amp; Clifford attractors.
+Image rendering using Python/Numpy. Creates Mandelbrot &amp; Julia fractals, Lorenz &amp; Clifford attractors.
