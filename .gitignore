@@ -1,0 +1,25 @@
+# incomplete .gitignore template, will add/develop further later
+
+# --- Virtual environment ---
+.venv/
+
+# --- Python bytecode / caches ---
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# --- Render output ---
+# Scratch renders go here. Curated images for the README go in examples/ (tracked).
+output/
+
+# --- Editor / OS files ---
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# --- Packaging leftovers ---
+*.egg-info/
+build/
+dist/
