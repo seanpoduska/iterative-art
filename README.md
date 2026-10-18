@@ -16,6 +16,13 @@ commands ran, venv, activate, installation
 
 leave placeholder, fill it in once something renders
 
+## Status
+
+Mandelbrot fractal: **IN PROGRESS**\
+Julia fractal: TODO\
+Lorenz attractor: TODO\
+Clifford attractor: TODO\
+
 ## License
 
 MIT. See [License](License)
