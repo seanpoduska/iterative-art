@@ -54,15 +54,37 @@ def escape_time_single(c, max_iter):
 
 
 def escape_time(c, max_iter):
+    """Return an int array shaped like c: iterations until |z| > 2 for each point.
+    counts: number of iterations it takes to escape
+    Points that never escape are assigned max_iter
+
+    Args:
+        c: the array of values to run the escape test on. Each iteration goes
+        through z = z**2 + c
+        max_iter: the maximum number of iterations c goes through before the
+        loop ends and max_iter is returned.
+
+    Returns:
+        An array of integers with each pixel's escape time.
+        For single value calculation, use escape_time_single()
     """
-    Return an int array: iteration at which each point escaped (max_iter if never).
-    """
-    # TODO: z stars at zeros, counts starts at zeros
-    # TODO: loop up to max_iter times (a loop over iterations is fine, a loop
-    #       over pixels is not)
-    # TODO: update z only where the point hasn't escaped yet
+    z = np.zeros_like(c, dtype=complex)  # array of zeroes shape c
+    counts = np.full(c.shape, max_iter)  # array of max_iter, return canvas
+    active = np.ones(c.shape, dtype=bool)  # bool array to track active pixels
+
+    for i in range(max_iter):
+        z[active] = z[active] ** 2 + c[active]  # update active pixels
+        escaped = (np.abs(z) > 2) & active
+        counts[escaped] = i + 1
+        active[escaped] = False
+        if not active.any():
+            break
+    return counts
 
 
 if __name__ == "__main__":
     print("script running")
-    print(make_grid(4, 3, center=0j, scale=2))
+    testGrid = make_grid(4, 3, center=0j, scale=2)
+    print(testGrid)
+
+    print(escape_time(testGrid, 50))
