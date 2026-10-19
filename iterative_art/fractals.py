@@ -2,13 +2,31 @@ import numpy as np
 
 
 def make_grid(width, height, center, scale):
-    """
-    Return a complex array of shape (height, width).
+    """Return a complex array of shape (height, width).
 
-    Document: what are center and scale? Which way is +imaginary?
+    Args:
+        width: pixel/array width
+        height: pixel/array height
+        center: complex number to be designated as central in window
+        scale: width of pixel/array in complex plane (how much the complex
+               plane changes in the window)
+
+    Returns:
+        variable sized array of complex numbers, shaped by width and height,
+        scaled by scale, and centered by designated complex number center
     """
-    # TODO: build the real and imaginary axes (np.linspace)
-    # TODO: combine them into one complex array (np.meshgrid, then x + 1j*y
+    # 1. real axis: width points from center.real - half_span_x to center.real + half_span_x
+    half_span_x = scale / 2
+    half_span_y = scale * height / width / 2
+
+    xs = np.linspace(center.real - half_span_x, center.real + half_span_x, width)
+    ys = np.linspace(center.imag + half_span_y, center.imag - half_span_y, height)
+
+    # 2. imaginary axis: height points, ordered so row 0 is the TOP (largest imag)
+    X, Y = np.meshgrid(xs, ys)
+
+    # 3. combine into one 2D complex array
+    return X + 1j * Y
 
 
 def escape_time_single(c, max_iter):
@@ -45,4 +63,6 @@ def escape_time(c, max_iter):
     # TODO: update z only where the point hasn't escaped yet
 
 
-print("script running")
+if __name__ == "__main__":
+    print("script running")
+    print(make_grid(4, 3, center=0j, scale=2))
